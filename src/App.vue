@@ -2,13 +2,13 @@
   <div
     style="background-color: rgba(50, 50, 50, 0.2); width: 600px; height: 600px"
   >
-    <vue3DraggableResizable :parent="true" :lockAspectRatio="false">
+    <vue3-draggable-resizable :parent="true" :lockAspectRatio="false">
       <div style="background-color: green; height: 100%; width: 100%">
         <span style="color: white; text-align: center">
           vue3-draggable-resizable
         </span>
       </div>
-    </vue3DraggableResizable>
+    </vue3-draggable-resizable>
   </div>
 </template>
 
