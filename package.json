@@ -1,7 +1,7 @@
 {
   "name": "vue3-ts-draggable-resizable",
   "author": "Jackie Tang <495473393@qq.com>",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "repository": {
     "type": "git",
