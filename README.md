@@ -1,13 +1,9 @@
-## Vue3 Component for draggable and resizable elements, with no dependencies.
-
-> Vue3 + typescript
-
-### Base on [vue-draggable-resizable](https://github.com/mauricius/vue-draggable-resizable)
+## Vue3 + typescript Component for draggable and resizable elements, with no dependencies.
 
 ## Install and basic usage
 
 ```bash
-$ npm install --save vue3-ts-draggable-resizable
+$ npm install --save vue-draggable-resizable-ts
 ```
 
 Register the component
@@ -16,18 +12,18 @@ Register the component
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import Vue3DraggableResizable from 'vue3-ts-draggable-resizable'
-import 'vue3-ts-draggable-resizable/dist/Vue3DraggableResizable.css'
+import vueDraggableResizableTs from 'vue-draggable-resizable-ts'
+import 'vue-draggable-resizable-ts/dist/VueDraggableResizableTs.css'
 
 const app = createApp(App)
 
-app.component('vue3-draggable-resizable', Vue3DraggableResizable)
+app.component('vue-draggable-resizable-ts', vueDraggableResizableTs)
 
 app.mount('#app')
 ```
 
 ```js
-<vue3-draggable-resizable style="background-color:green">
+<vue-draggable-resizable-ts style="background-color:green">
   test
-</vue3-draggable-resizable>
+</vue-draggable-resizable-ts>
 ```

@@ -2,6 +2,7 @@
   <div
     ref="el"
     :style="style"
+    class="v3dr"
     @mousedown="elementMouseDown"
     @touchstart="elementTouchDown"
   >
@@ -193,6 +194,9 @@ type ResizeHandler = (
   height: number
 ) => boolean
 
+const RESIZING_EVNET = 'resizing'
+const DRAGGING_EVENT = 'dragging'
+
 import {
   defineComponent,
   onMounted,
@@ -205,8 +209,6 @@ import {
 } from 'vue'
 
 export default defineComponent({
-  name: 'vue3-draggable-resizable',
-
   props: {
     x: {
       type: Number,
@@ -331,12 +333,21 @@ export default defineComponent({
 
     resizeAreaSize: {
       type: Number,
-      default: 10,
+      default: 5,
     },
 
     dragHandle: {
       type: String,
       default: '',
+    },
+
+    initialPosition: {
+      type: String,
+      default: '',
+      validator: (val: string) =>
+        ['', 'tl', 'tm', 'tr', 'ml', 'mm', 'mr', 'bl', 'bm', 'br'].includes(
+          val
+        ),
     },
   },
 
@@ -573,7 +584,7 @@ export default defineComponent({
       right.value = r
       bottom.value = b
 
-      context.emit('dragging', l, t)
+      context.emit(DRAGGING_EVENT, l, t)
       dragging.value = true
     }
 
@@ -717,7 +728,7 @@ export default defineComponent({
       width.value = cW
       height.value = cH
 
-      context.emit('resizing', l, t, cW, cH)
+      context.emit(RESIZING_EVNET, l, t, cW, cH)
 
       resizing.value = true
     }
@@ -971,12 +982,36 @@ export default defineComponent({
 
       const [domW, domH] = getComputedSize(el.value)
 
-      aspectFactor.value =
-        (props.w !== 'auto' ? (props.w as number) : domW) /
-        (props.h !== 'auto' ? (props.h as number) : domH)
+      const elW = props.w !== 'auto' ? (props.w as number) : domW
+      const elH = props.h !== 'auto' ? (props.h as number) : domH
 
-      width.value = props.w !== 'auto' ? (props.w as number) : domW
-      height.value = props.h !== 'auto' ? (props.h as number) : domH
+      if (props.initialPosition) {
+        const [yAxis, xAxis] = props.initialPosition
+        switch (yAxis) {
+          case 't':
+            break
+          case 'm':
+            top.value = (pHeight - elH) / 2
+            break
+          case 'b':
+            top.value = pHeight - elH
+        }
+        switch (xAxis) {
+          case 'l':
+            break
+          case 'm':
+            left.value = (pWidth - elW) / 2
+            break
+          case 'r':
+            left.value = pWidth - elW
+            break
+        }
+      }
+
+      aspectFactor.value = elW / elH
+
+      width.value = elW
+      height.value = elH
 
       right.value = parentWidth.value - width.value - left.value
       bottom.value = parentHeight.value - height.value - top.value
@@ -1052,11 +1087,11 @@ export default defineComponent({
   },
 
   emits: {
-    resizing(left: number, top: number, width: number, height: number) {
+    [RESIZING_EVNET](left: number, top: number, width: number, height: number) {
       return true
     },
 
-    dragging(left: number, top: number) {
+    [DRAGGING_EVENT](left: number, top: number) {
       return true
     },
   },
@@ -1064,6 +1099,14 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.v3dr {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  touch-action: none;
+  position: absolute;
+}
+
 .handle {
   opacity: 0;
   z-index: 99999;

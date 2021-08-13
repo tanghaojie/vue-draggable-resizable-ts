@@ -1,31 +1,32 @@
 {
-  "name": "vue3-ts-draggable-resizable",
+  "name": "vue-draggable-resizable-ts",
   "author": "Jackie Tang <495473393@qq.com>",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/tanghaojie/vue3-draggable-resizable.git"
+    "url": "https://github.com/tanghaojie/vue-draggable-resizable-ts.git"
   },
   "license": "MIT",
-  "homepage": "https://github.com/tanghaojie/vue3-draggable-resizable",
+  "homepage": "https://github.com/tanghaojie/vue-draggable-resizable-ts",
   "keywords": [
+    "vue",
     "vue3",
-    "typescript",
-    "component",
     "dragabble",
-    "resizable"
+    "resizable",
+    "typescript",
+    "component"
   ],
-  "main": "dist/Vue3DraggableResizable.umd.min.js",
-  "unpkg": "dist/Vue3DraggableResizable.umd.min.js",
+  "main": "dist/VueDraggableResizableTs.umd.min.js",
+  "unpkg": "dist/VueDraggableResizableTs.umd.min.js",
   "browser": {
-    "./sfc": "src/vue3-draggable-resizable.vue"
+    "./sfc": "src/vue-draggable-resizable-ts.vue"
   },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build-bundle": "vue-cli-service build --target lib --name Vue3DraggableResizable ./src/index.js"
+    "build-bundle": "vue-cli-service build --target lib --name VueDraggableResizableTs ./src/index.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",
